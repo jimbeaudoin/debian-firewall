@@ -99,3 +99,6 @@ else
     sudo service iptables-persistent start
     echo "# => SAVES RULES PERMANENTLY: EXECUTED"
 fi
+
+echo "# => FIREWALL CONFIGURATION: EXECUTED"
+echo "# => END"
