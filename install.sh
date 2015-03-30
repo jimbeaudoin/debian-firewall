@@ -9,11 +9,11 @@
 echo -n "Do you want to update your system (y/n)[y]? "
 read answer
 if echo "$answer" | grep -iq "^n" ;then
-    echo "# => UPDATE SYSTEM: SKIPPED"
+    echo "# => SYSTEM UPDATE: SKIPPED"
 else
     sudo apt-get update
     sudo apt-get -y upgrade
-    echo "# => UPDATE SYSTEM: EXECUTED"
+    echo "# => SYSTEM UPDATE: EXECUTED"
 fi
 
 # Ask the user for Firewall Rules Cleanup
@@ -93,11 +93,11 @@ echo "# => DEFAULT CONFIGURATION: EXECUTED"
 echo -n "Do you want to save the new firewall rules permanently (y/n)[y]? "
 read answer
 if echo "$answer" | grep -iq "^n" ;then
-    echo "# => SAVES RULES PERMANENTLY: SKIPPED"
+    echo "# => SAVE RULES PERMANENTLY: SKIPPED"
 else
     sudo apt-get install iptables-persistent
     sudo service iptables-persistent start
-    echo "# => SAVES RULES PERMANENTLY: EXECUTED"
+    echo "# => SAVE RULES PERMANENTLY: EXECUTED"
 fi
 
 echo "# => FIREWALL CONFIGURATION: EXECUTED"
