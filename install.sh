@@ -9,11 +9,11 @@
 echo -n "Do you want to update your system (y/n)[y]? "
 read answer
 if echo "$answer" | grep -iq "^n" ;then
-    echo No
+    echo "# => UPDATE SYSTEM: SKIPPED"
 else
     sudo apt-get update
     sudo apt-get -y upgrade
-    echo "# => SYSTEM UPDATED SUCCESSFULLY"
+    echo "# => UPDATE SYSTEM: EXECUTED"
 fi
 
 # Ask the user for Firewall Rules Cleanup
