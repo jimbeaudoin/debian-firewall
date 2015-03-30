@@ -40,3 +40,18 @@ else
     sudo iptables -A INPUT -p tcp --tcp-flags ALL ALL -j DROP
     echo "# => SIMPLE PROTECTION: EXECUTED"
 fi
+
+# Execute Default Configuration
+# Allow localhost connection & established connections
+sudo iptables -A INPUT -i lo -j ACCEPT
+sudo iptables -I INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT
+
+# DROP ALL others INPUT/FORWARD connections
+sudo iptables -P INPUT DROP
+sudo iptables -P FORWARD DROP
+
+# WARNING: OUTPUT connections should be closed and configured carefully
+# on highly secured system.
+# Accept all OUTPUT connections
+sudo iptables -P OUTPUT ACCEPT
+echo "# => DEFAULT CONFIGURATION: EXECUTED"
