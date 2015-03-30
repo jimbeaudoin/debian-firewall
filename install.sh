@@ -25,3 +25,18 @@ else
     sudo iptables -F
     echo "# => CLEANUP FIREWALL RULES: EXECUTED"
 fi
+
+# Ask the user for Simple Protection
+echo -n "Do you want to add a simple protection (y/n)[y]? "
+read answer
+if echo "$answer" | grep -iq "^n" ;then
+    echo "# => SIMPLE PROTECTION: SKIPPED"
+else
+    # Block null packets
+    sudo iptables -A INPUT -p tcp --tcp-flags ALL NONE -j DROP
+    # Reject syn-flood attack
+    sudo iptables -A INPUT -p tcp ! --syn -m state --state NEW -j DROP
+    # Reject XMAS packets
+    sudo iptables -A INPUT -p tcp --tcp-flags ALL ALL -j DROP
+    echo "# => SIMPLE PROTECTION: EXECUTED"
+fi
