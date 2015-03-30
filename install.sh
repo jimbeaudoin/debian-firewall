@@ -41,6 +41,19 @@ else
     echo "# => SIMPLE PROTECTION: EXECUTED"
 fi
 
+# Ask the user to close IPv6 connections
+echo -n "Do you want to close IPv6 connections (y/n)[y]? "
+read answer
+if echo "$answer" | grep -iq "^n" ;then
+    echo "# => CLOSE IPv6 CONNECTIONS: SKIPPED"
+else
+    # DROP all IPv6 Connections if you don't use IPv6
+    sudo ip6tables -P INPUT DROP
+    sudo ip6tables -P OUTPUT DROP
+    sudo ip6tables -P FORWARD DROP
+    echo "# => CLOSE IPv6 CONNECTIONS: EXECUTED"
+fi
+
 # Execute Default Configuration
 # Allow localhost connection & established connections
 sudo iptables -A INPUT -i lo -j ACCEPT
