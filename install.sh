@@ -88,3 +88,14 @@ sudo iptables -P FORWARD DROP
 # Accept all OUTPUT connections
 sudo iptables -P OUTPUT ACCEPT
 echo "# => DEFAULT CONFIGURATION: EXECUTED"
+
+# Ask the user to save the rules permanently
+echo -n "Do you want to save the new firewall rules permanently (y/n)[y]? "
+read answer
+if echo "$answer" | grep -iq "^n" ;then
+    echo "# => SAVES RULES PERMANENTLY: SKIPPED"
+else
+    sudo apt-get install iptables-persistent
+    sudo service iptables-persistent start
+    echo "# => SAVES RULES PERMANENTLY: EXECUTED"
+fi
