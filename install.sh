@@ -41,6 +41,26 @@ else
     echo "# => SIMPLE PROTECTION: EXECUTED"
 fi
 
+# Ask the user for HTTP (80) connections
+echo -n "Do you want to allow HTTP (port 80) connections (y/n)[n]? "
+read answer
+if echo "$answer" | grep -iq "^y" ;then
+    sudo iptables -A INPUT -p tcp -m tcp --dport 80 -j ACCEPT
+    echo "# => ALLOW HTTP CONNECTIONS: EXECUTED"
+else
+    echo "# => ALLOW HTTP CONNECTIONS: SKIPPED"
+fi
+
+# Ask the user for HTTPS (443) connections
+echo -n "Do you want to allow HTTPS (port 443) connections (y/n)[n]? "
+read answer
+if echo "$answer" | grep -iq "^y" ;then
+    sudo iptables -A INPUT -p tcp -m tcp --dport 443 -j ACCEPT
+    echo "# => ALLOW HTTPS CONNECTIONS: EXECUTED"
+else
+    echo "# => ALLOW HTTPS CONNECTIONS: SKIPPED"
+fi
+
 # Ask the user to close IPv6 connections
 echo -n "Do you want to close IPv6 connections (y/n)[y]? "
 read answer
