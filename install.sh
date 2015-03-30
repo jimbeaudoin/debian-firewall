@@ -16,3 +16,12 @@ else
     echo "# => SYSTEM UPDATED SUCCESSFULLY"
 fi
 
+# Ask the user for Firewall Rules Cleanup
+echo -n "Do you want to cleanup the current firewall rules (y/n)[y]? "
+read answer
+if echo "$answer" | grep -iq "^n" ;then
+    echo "# => CLEANUP FIREWALL RULES: SKIPPED"
+else
+    sudo iptables -F
+    echo "# => CLEANUP FIREWALL RULES: EXECUTED"
+fi
