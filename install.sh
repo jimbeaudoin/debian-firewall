@@ -67,10 +67,11 @@ read answer
 if echo "$answer" | grep -iq "^n" ;then
     echo "# => CLOSE IPv6 CONNECTIONS: SKIPPED"
 else
-    # DROP all IPv6 Connections if you don't use IPv6
+    # DROP IPv6 Connections
     sudo ip6tables -P INPUT DROP
     sudo ip6tables -P OUTPUT ACCEPT
     sudo ip6tables -P FORWARD DROP
+    # Accept localhost (internal) connection
     sudo ip6tables -A INPUT -i lo -j ACCEPT
     echo "# => CLOSE IPv6 CONNECTIONS: EXECUTED"
 fi
