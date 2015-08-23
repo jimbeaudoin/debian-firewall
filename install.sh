@@ -61,16 +61,17 @@ else
     echo "# => ALLOW HTTPS CONNECTIONS: SKIPPED"
 fi
 
-# Ask the user to close IPv6 connections
-echo -n "Do you want to close IPv6 connections (y/n)[y]? "
+# Ask the user to secure IPv6 connections
+echo -n "Do you want to secure IPv6 connections (y/n)[y]? "
 read answer
 if echo "$answer" | grep -iq "^n" ;then
     echo "# => CLOSE IPv6 CONNECTIONS: SKIPPED"
 else
     # DROP all IPv6 Connections if you don't use IPv6
     sudo ip6tables -P INPUT DROP
-    sudo ip6tables -P OUTPUT DROP
+    sudo ip6tables -P OUTPUT ACCEPT
     sudo ip6tables -P FORWARD DROP
+    sudo ip6tables -A INPUT -i lo -j ACCEPT
     echo "# => CLOSE IPv6 CONNECTIONS: EXECUTED"
 fi
 
