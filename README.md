@@ -12,10 +12,10 @@ The simple protection feature add the following protections:
 
 ## Default Configuration
 The default configuration add the following protections:
- * Allow Localhost Connections
- * Allow Only Established Connections
- * Drop Input Connections
- * Drop Forward Connections
+ * Allow localhost connections
+ * Allow only established connections
+ * Drop input connections
+ * Drop forward connections
 
 ## Prerequisite
 Iptables should be installed by default on your system. You can verify your installation  with the following command:
